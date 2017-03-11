@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/memories', function(req, res, next) {
 
-	res.render('user.html');
+	res.render('memories.html');
 });
 
 module.exports = router;
