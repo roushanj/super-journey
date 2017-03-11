@@ -4,7 +4,7 @@ var path = require('path');
 
 var main = require('./routes/main');
 var memories = require('./routes/memories');
-
+var user = require('./routes/user');
 var app = express();
 var port = 3000;
 
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extented: false}));
 
 app.use('/', main);
+app.use('/user', user);
 app.use('/user', memories);
 
 
