@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/register', function(req, res, next) {
 
-	res.render('user.html');
+	res.render('register');
 });
 
-router.post('/', function(req, res, next) {
+router.get('/login', function(req, res, next) {
 
-	res.send("congrats");
+	res.render('login');
 });
+
 module.exports = router;
