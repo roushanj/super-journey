@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcryptjs = require('bcryptjs');
+
 
 
 //user schema
@@ -20,3 +21,13 @@ var userSchema = mongoose.Schema({
           type: String
 	}
 });
+
+var User = module.exports = mongoose.model('User', userSchema);
+
+module.exports.createUser = function (newUser, callback) {
+	
+	bcryptjs.hash(newUser.password, null, function(err, hash) {
+    newUser.password = hash;
+    newUser.save(callback);
+});
+}
