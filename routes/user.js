@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
 
 //Register route
 
@@ -28,8 +29,23 @@ router.post('/register', function(req, res, next){
 
    } else{
    	  
-   	  var newuser = new User;
-   };
+   	  var newuser = new User({
+
+   	  	  username: username,
+   	  	  email: email,
+   	  	  password: password
+   	  });
+
+   	  User.createUser(newuser, function (err, user) {
+             
+            if (err) throw err;
+            console.log(user);
+                     
+   	  });
+
+   	  req.flash('success_msg', 'your are Registered');
+      res.redirect('/users/login');
+   }
 });
 
 //login route
@@ -38,24 +54,6 @@ router.get('/login', function(req, res, next) {
 
 	res.render('login');
 
-});
-router.post('/login', function(req, res, next){
-   
-   var username = req.body.username;
-   var password = req.body.password;
-   
-
-   req.checkBody('username','username is required').notEmpty();
-   req.checkBody('password','password is required').notEmpty();
-
-   var errors = req.validationErrors();
-
-   if (errors) {
-   	res.render('login', {errors:errors});
-
-   } else{
-   	console.log('No');
-   };
 });
 
 
